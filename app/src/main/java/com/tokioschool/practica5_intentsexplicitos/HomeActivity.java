@@ -3,13 +3,22 @@ package com.tokioschool.practica5_intentsexplicitos;
 import static com.tokioschool.practica5_intentsexplicitos.Constants.KEY_NAME_STRING;
 import static com.tokioschool.practica5_intentsexplicitos.Constants.KEY_PASSWORD_STRING;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+
+import com.tokioschool.practica5_intentsexplicitos.databinding.ActivityHomeBinding;
 
 public class HomeActivity extends AppCompatActivity {
 
+    private ActivityHomeBinding binding;
     private String name;
     private String password;
 
@@ -18,8 +27,27 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        binding = ActivityHomeBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         getNameAndPass();
+        listeners();
+    }
+
+    private void listeners() {
+        binding.mainActivityToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                if (item.getItemId() == R.id.menu_coche){
+                    getSupportFragmentManager().beginTransaction().add(binding.homeactivityFragmentFrame.getId(), new RentCarFragment()).commitAllowingStateLoss();
+                }
+                if (item.getItemId() == R.id.menu_disney){
+                    String url = "https://www.disneylandparis.com/";
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                    startActivity(intent);
+                }
+                return false;
+            }
+        });
     }
 
     private void getNameAndPass() {

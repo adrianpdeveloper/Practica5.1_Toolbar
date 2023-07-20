@@ -17,15 +17,15 @@
             android:id="@+id/main_activity_toolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/primary_green"
-            app:title="Registro prueba"
+            android:background="?colorPrimary"
+            app:title="@string/register_activity_toolbar_title"
             app:titleTextColor="@color/white" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/main_activity_profile_pic"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="136dp"
+        android:layout_height="116dp"
         android:layout_marginTop="35dp"
         app:layout_constraintBottom_toTopOf="@+id/main_activity_name_inputlayout"
         app:layout_constraintEnd_toEndOf="parent"

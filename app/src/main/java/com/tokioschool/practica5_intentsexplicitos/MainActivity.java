@@ -5,6 +5,9 @@ import static com.tokioschool.practica5_intentsexplicitos.Constants.KEY_PASSWORD
 
 import androidx.appcompat.app.AppCompatActivity;
 
+
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -119,11 +122,21 @@ public class MainActivity extends AppCompatActivity {
         binding.activityMainLoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (name != null && password != null && bundle != null){
+                if (name != null && password != null && bundle != null && name.equals(String.valueOf(binding.registerActivityLoginEdittext.getText())) && password.equals(String.valueOf(binding.registerActivityPasswordEdittext.getText()))){
                     Intent intent = new Intent(getApplicationContext(), HomeActivity.class).putExtra("bundle", bundle);
                     startActivity(intent);
                 }else{
-                    Snackbar.make(binding.getRoot(), R.string.main_activity_login_failed, BaseTransientBottomBar.LENGTH_LONG).show();
+                    Log.d("Adrian", String.valueOf(binding.registerActivityPasswordEdittext.getText()));
+                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                    builder.setTitle("Parametros erroneos")
+                            .setMessage("El email o la contraseña no son correctos, revisa los parametros.")
+                            .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // Aquí puedes realizar acciones al hacer clic en "Aceptar"
+                                }
+                            }).show();
+
                 }
             }
         });

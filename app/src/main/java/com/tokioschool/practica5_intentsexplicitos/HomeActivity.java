@@ -14,6 +14,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.snackbar.BaseTransientBottomBar;
+import com.google.android.material.snackbar.Snackbar;
 import com.tokioschool.practica5_intentsexplicitos.databinding.ActivityHomeBinding;
 
 public class HomeActivity extends AppCompatActivity {
@@ -55,8 +57,9 @@ public class HomeActivity extends AppCompatActivity {
             bundle = getIntent().getExtras().getBundle("bundle");
             name = bundle.getString(KEY_NAME_STRING);
             password = bundle.getString(KEY_PASSWORD_STRING);
-            Log.i("Nombre","Nombre: "+name);
-            Log.i("Pass","Contraseña: "+password);
+            Snackbar.make(binding.getRoot(),
+                    "Login con nombre '"+name+"' y contraseña '"+password+"'", BaseTransientBottomBar.LENGTH_LONG).show();
+
         }catch (Exception e){
             Log.i("Mensaje", "No hay password ni contraseña");
         }
